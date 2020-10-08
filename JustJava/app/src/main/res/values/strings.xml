@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Just Java</string>
+    <string name="quantity" translatable="false">quantity</string>
+    <string name="preview_order_button" translatable="false">preview</string>
+    <string name="default_value_in_dollars">$0.00</string>
+    <string name="price" translatable="false">order summary:</string>
+    <string name="default_quantity">0</string>
+    <string name="quantity_increment">+</string>
+    <string name="quantity_decrement">-</string>
+    <string name="toppings" translatable="false">toppings</string>
+    <string name="whipped_cream" translatable="false">Whipped cream</string>
+    <string name="chocolate" translatable="false">Chocolate</string>
+    <string name="name" translatable="false">Name</string>
+    <string name="send_order_button" translatable="false">send order</string>
+    <string name="reset" translatable="false">reset</string>
+</resources>

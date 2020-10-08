@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="false">
+
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="true"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+        <EditText
+            android:id="@+id/user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:hint="@string/name"
+            android:inputType="textMultiLine" />
+
+        <TextView
+            style="@style/kAnava"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:text="@string/toppings"
+            tools:ignore="RtlSymmetry" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            tools:ignore="RtlSymmetry">
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/CheckBox_WhippedCream"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="24dp" />
+
+            <TextView
+                style="@style/kAnava"
+                android:text="@string/whipped_cream" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            tools:ignore="RtlSymmetry">
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/CheckBox_Chocolate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="24dp" />
+
+            <TextView
+                style="@style/kAnava"
+                android:text="@string/chocolate" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/quantity"
+            style="@style/kAnava"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:text="@string/quantity"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlSymmetry" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_decrement"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/quantity_decrement"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/quantity_text_view"
+                style="@style/kAnava"
+                android:layout_marginTop="16dp"
+                android:paddingStart="8dp"
+                android:text="@string/default_quantity"
+                android:textStyle="bold"
+                tools:ignore="RtlSymmetry" />
+
+            <Button
+                android:id="@+id/button_increment"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/quantity_increment"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/order_summary_text_view"
+            style="@style/kAnava"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:text="@string/price"
+            tools:ignore="RtlSymmetry" />
+
+
+        <TextView
+            android:id="@+id/price_text_view"
+            style="@style/kAnava"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:text="@string/default_value_in_dollars"
+            android:textStyle="bold"
+            tools:ignore="RtlSymmetry" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/preview_order_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/preview_order_button"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/reset_order_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/reset"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/send_order_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="34dp"
+            android:text="@string/send_order_button"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+
+</ScrollView>
