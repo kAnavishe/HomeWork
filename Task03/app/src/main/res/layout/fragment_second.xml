@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentFirst">
+    tools:context=".FragmentSecond">
 
     <!-- TODO: Update blank fragment layout -->
     <ImageView
         android:layout_margin="16dp"
         android:scaleType="centerCrop"
-        android:id="@+id/DogImage"
-        android:src="@drawable/dog"
+        android:id="@+id/RocketImage"
+        android:src="@drawable/rocket"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
