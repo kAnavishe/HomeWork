@@ -1,6 +1,7 @@
 package com.example.android.task03;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -63,6 +64,20 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             return 3;
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch (position) {
+                case 0:
+                    return "One";
+                case 1:
+                    return "Two";
+                case 2:
+                    return "Three";
+            }
+            return super.getPageTitle(position);
         }
     }
 }
