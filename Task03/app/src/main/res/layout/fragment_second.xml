@@ -5,9 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".FragmentSecond">
 
-    <!-- TODO: Update blank fragment layout -->
     <ImageView
-        android:layout_margin="16dp"
+        android:layout_margin="8dp"
         android:scaleType="centerCrop"
         android:id="@+id/RocketImage"
         android:src="@drawable/rocket"

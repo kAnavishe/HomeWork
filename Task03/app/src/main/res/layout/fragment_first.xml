@@ -5,9 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".FragmentFirst">
 
-    <!-- TODO: Update blank fragment layout -->
     <ImageView
-        android:layout_margin="16dp"
+        android:layout_margin="8dp"
         android:scaleType="centerCrop"
         android:id="@+id/DogImage"
         android:src="@drawable/dog"
