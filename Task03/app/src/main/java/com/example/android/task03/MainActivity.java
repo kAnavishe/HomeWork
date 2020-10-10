@@ -37,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
         mToolBar = findViewById(R.id.toolBar);
         mToolBar.setTitle(getResources().getString(R.string.title));
-        //   setSupportActionBar(mToolBar);
 
         mTabLayout = findViewById(R.id.tabLayout);
+
         mDogTabItem = findViewById(R.id.dogTabItem);
         mCarTabItem = findViewById(R.id.carTabItem);
         mRocketTabItem = findViewById(R.id.rocketTabItem);
