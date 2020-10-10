@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentSecond">
+    tools:context=".FragmentDog">
 
     <ImageView
+        android:id="@+id/DogImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_margin="8dp"
         android:scaleType="centerCrop"
-        android:id="@+id/RocketImage"
-        android:src="@drawable/rocket"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:src="@drawable/dog" />
 
 </FrameLayout>

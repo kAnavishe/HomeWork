@@ -5,13 +5,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.fragment.app.Fragment;
 
 
-public class FragmentSecond extends Fragment {
+public class FragmentCar extends Fragment {
 
-    public FragmentSecond() {
-        Log.d("Maks", "FragmentSecond Creation");
+    public FragmentCar() {
+        Log.d("Maks", "FragmentThird Creation");
     }
 
     public void onCreate(Bundle SavedInstanceState) {
@@ -20,6 +21,8 @@ public class FragmentSecond extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_second, container, false);
+        return inflater.inflate(R.layout.fragment_car, container, false);
     }
 }
+
+

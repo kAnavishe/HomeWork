@@ -14,13 +14,20 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toolbar;
 
-import static androidx.fragment.app.FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT;
+import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
 
     ViewPager mPager;
     PagerAdapter mAdapter;
+    Toolbar mToolBar;
+    TabLayout mTabLayout;
+    TabItem mDogTabItem;
+    TabItem mCarTabItem;
+    TabItem mRocketTabItem;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -28,10 +35,37 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mToolBar = findViewById(R.id.toolBar);
+        mToolBar.setTitle(getResources().getString(R.string.title));
+        //   setSupportActionBar(mToolBar);
+
+        mTabLayout = findViewById(R.id.tabLayout);
+        mDogTabItem = findViewById(R.id.dogTabItem);
+        mCarTabItem = findViewById(R.id.carTabItem);
+        mRocketTabItem = findViewById(R.id.rocketTabItem);
+
         mPager = findViewById(R.id.ViewPager);
-        mAdapter = new MyAdapter(getSupportFragmentManager(), BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        mAdapter = new MyAdapter(getSupportFragmentManager(), mTabLayout.getTabCount());
         mPager.setAdapter(mAdapter);
 
+        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                mPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+        mPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         mPager.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @Override
             public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
@@ -52,13 +86,13 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new FragmentFirst();
+                    return new FragmentDog();
                 case 1:
-                    return new FragmentSecond();
+                    return new FragmentRocket();
                 case 2:
-                    return new FragmentThird();
+                    return new FragmentCar();
             }
-            return new FragmentFirst();
+            return new FragmentDog();
         }
 
         @Override
