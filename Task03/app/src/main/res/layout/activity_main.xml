@@ -16,7 +16,9 @@
         android:theme="?attr/actionBarTheme"
         android:titleTextColor="@color/design_default_color_background"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+        </Toolbar>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
@@ -34,22 +36,19 @@
             android:id="@+id/dogTabItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/dog_icon"
-            android:text="@string/dog" />
+            android:text="@string/today" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/rocketTabItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/rocket_icon"
-            android:text="@string/rocket" />
+            android:text="@string/three_days" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/carTabItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/car_icon"
-            android:text="@string/car" />
+            android:text="@string/seven_days" />
 
     </com.google.android.material.tabs.TabLayout>
 
