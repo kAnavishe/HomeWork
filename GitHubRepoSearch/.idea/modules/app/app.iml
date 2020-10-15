@@ -87,15 +87,15 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 30 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Gradle: com.android.support:support-annotations:25.1.0@jar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:appcompat-v7:25.1.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:animated-vector-drawable:25.1.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:support-vector-drawable:25.1.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:support-v4:25.1.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:support-fragment:25.1.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:support-media-compat:25.1.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:support-core-utils:25.1.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:support-core-ui:25.1.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.android.support:support-compat:25.1.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-annotations:25.4.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:appcompat-v7:25.4.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:animated-vector-drawable:25.4.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-vector-drawable:25.4.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-v4:25.4.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-fragment:25.4.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-media-compat:25.4.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-core-utils:25.4.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-core-ui:25.4.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-compat:25.4.0@aar" level="project" />
   </component>
 </module>

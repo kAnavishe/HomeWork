@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GitHubRepoSearch.iml" filepath="$PROJECT_DIR$/.idea/modules/GitHubRepoSearch.iml" group="GitHubRepoSearch" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/GitHubRepoSearch.iml" filepath="$PROJECT_DIR$/.idea/GitHubRepoSearch.iml" group="GitHubRepoSearch" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="GitHubRepoSearch/app" />
     </modules>
   </component>

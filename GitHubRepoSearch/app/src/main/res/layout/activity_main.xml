@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
   Copyright (C) 2016 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,33 +14,30 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="16dp"
-    android:paddingTop="16dp"
-    android:paddingRight="16dp">
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.android.datafrominternet.MainActivity">
 
     <EditText
         android:id="@+id/et_search_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints=""
-        android:hint="@string/enter_a_query_and_then_click_search"
-        android:textSize="22sp"
-        tools:ignore="TextFields" />
+        android:hint="Enter a query, then click Search"
+        android:textSize="22sp" />
 
     <TextView
         android:id="@+id/tv_url_display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/your_url_will_show_up_here_after_clicking_search"
-        android:textSize="29sp" />
+        android:text="Click search and your URL will show up here!"
+        android:textSize="22sp" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -50,7 +48,7 @@
             android:id="@+id/tv_github_search_results_json"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/scroll_to_make_a_search"
+            android:text="Make a search!"
             android:textSize="18sp" />
     </ScrollView>
 </LinearLayout>
