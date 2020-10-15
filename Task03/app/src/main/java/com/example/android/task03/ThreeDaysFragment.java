@@ -22,7 +22,6 @@ public class ThreeDaysFragment extends Fragment {
     String dayOfMonth;
     Drawable image;
     String temperature;
-    ArrayList<Date> datesArray;
 
     public ThreeDaysFragment() {
     }
