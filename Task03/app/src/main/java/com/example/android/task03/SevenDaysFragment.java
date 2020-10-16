@@ -1,5 +1,6 @@
 package com.example.android.task03;
 
+import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ public class SevenDaysFragment extends Fragment {
     public SevenDaysFragment() {
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     public void onCreate(Bundle SavedInstanceState) {
         super.onCreate(SavedInstanceState);
         date = new Date();

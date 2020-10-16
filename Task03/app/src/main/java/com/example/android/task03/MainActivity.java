@@ -34,14 +34,12 @@ public class MainActivity extends AppCompatActivity {
     TabLayout mTabLayout;
     Button mSearchButton;
     EditText mEditText;
-    static TodayFragment mTodayFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTodayFragment = new TodayFragment(WeatherData.currentTemp);
         mSearchButton = findViewById(R.id.location_search_button);
         mToolBar = findViewById(R.id.toolBar);
         mTabLayout = findViewById(R.id.tabLayout);
@@ -92,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return mTodayFragment;
+                    return new TodayFragment();
                 case 1:
                     return new ThreeDaysFragment();
                 case 2:
@@ -132,8 +130,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<MainData> call, Response<MainData> response) {
 
-                Log.d("MAX", "onResponse " + response.message() + " " + response.body().getMainDataValues().getTemp() + " " + response.body().getMainDataValues().getHumidity());
-                WeatherData.currentTemp = MainDataValues.getTemp();
+                Log.d("MAX", "onResponse " + response.message()
+                        + " " + response.body().getMainDataValues().getTemp()
+                        + " " + response.body().getMainDataValues().getHumidity());
             }
 
             @Override

@@ -1,5 +1,6 @@
 package com.example.android.task03;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -39,7 +40,7 @@ public class SevenDaysRecyclerViewAdapter extends RecyclerView.Adapter<SevenDays
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM/dd/yyyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM/dd/yyyy");
         holder.imageView.setImageDrawable(image);
         holder.textView1.setText(simpleDateFormat.format(date));
         holder.textView2.setText(temperature);

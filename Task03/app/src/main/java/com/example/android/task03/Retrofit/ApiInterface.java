@@ -6,7 +6,6 @@ import retrofit2.http.Query;
 
 
 public interface ApiInterface {
-    @GET("weather?appid=5722d2d4e58e7f38694182fdae59019d&units=metric")
-
+    @GET("weather?appid=20643d0926a7e824ed846f8a8ab41274&units=metric")
     Call<MainData> getWeatherData(@Query("q") String name);
 }

@@ -5,12 +5,12 @@ import com.google.gson.annotations.SerializedName;
 public class MainDataValues {
 
     @SerializedName("temp")
-    static String temp;
+    String temp;
 
     @SerializedName("humidity")
     String humidity;
 
-    public static String getTemp() {
+    public String getTemp() {
         return temp;
     }
 

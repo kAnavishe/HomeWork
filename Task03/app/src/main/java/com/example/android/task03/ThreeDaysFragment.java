@@ -1,5 +1,6 @@
 package com.example.android.task03;
 
+import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -26,13 +27,14 @@ public class ThreeDaysFragment extends Fragment {
     public ThreeDaysFragment() {
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     public void onCreate(Bundle SavedInstanceState) {
         super.onCreate(SavedInstanceState);
 
         Date date = new Date();
-        SimpleDateFormat simpleDateFormatDayOfWeek = new SimpleDateFormat("E");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormatDayOfWeek = new SimpleDateFormat("E");
         dayOfWeek = (simpleDateFormatDayOfWeek.format(date)).toString();
-        SimpleDateFormat simpleDateFormatDayOfMonth = new SimpleDateFormat("dd/MMMM");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormatDayOfMonth = new SimpleDateFormat("dd/MMMM");
         dayOfMonth = (simpleDateFormatDayOfMonth.format(date)).toString();
         image = getResources().getDrawable(R.drawable.rain);
         temperature = "+23";

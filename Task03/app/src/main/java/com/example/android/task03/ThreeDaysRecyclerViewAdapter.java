@@ -21,7 +21,11 @@ public class ThreeDaysRecyclerViewAdapter extends RecyclerView.Adapter<ThreeDays
 
 
     public ThreeDaysRecyclerViewAdapter(Context ct, String week, String month, Drawable img, String temp) {
-        context = ct; dayOfWeek = week; dayOfMonth = month; image = img; temperature = temp;
+        context = ct;
+        dayOfWeek = week;
+        dayOfMonth = month;
+        image = img;
+        temperature = temp;
     }
 
     @NonNull

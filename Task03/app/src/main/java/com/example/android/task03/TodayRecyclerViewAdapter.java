@@ -11,9 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.android.task03.Retrofit.MainData;
-import com.example.android.task03.Retrofit.MainDataValues;
-
 public class TodayRecyclerViewAdapter extends RecyclerView.Adapter<TodayRecyclerViewAdapter.ViewHolder> {
 
     Context context;
@@ -21,9 +18,11 @@ public class TodayRecyclerViewAdapter extends RecyclerView.Adapter<TodayRecycler
     String temperature;
     String hour;
 
-    public TodayRecyclerViewAdapter (Context ct, Drawable img, String temp, String h) {
-        context = ct; image = img; temperature = temp; hour = h;
-        updateTodayUI();
+    public TodayRecyclerViewAdapter(Context ct, Drawable img, String temp, String h) {
+        context = ct;
+        image = img;
+        temperature = temp;
+        hour = h;
     }
 
     public TodayRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -55,10 +54,5 @@ public class TodayRecyclerViewAdapter extends RecyclerView.Adapter<TodayRecycler
             textView2 = itemView.findViewById(R.id.current_time);
             imageView = itemView.findViewById(R.id.weather_condition);
         }
-    }
-    public void updateTodayUI() {
-        String temp = MainDataValues.getTemp();
-        temperature = temp;
-        notifyDataSetChanged();
     }
 }
