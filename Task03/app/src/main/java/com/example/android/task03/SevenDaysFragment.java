@@ -1,7 +1,6 @@
 package com.example.android.task03;
 
 import android.annotation.SuppressLint;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,15 +11,10 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.Date;
-
 
 public class SevenDaysFragment extends Fragment {
 
-    Date date;
-    Drawable image;
-    String temperature;
-
+    SevenDaysRecyclerViewAdapter sevenDaysRecyclerViewAdapter;
 
     public SevenDaysFragment() {
     }
@@ -28,11 +22,9 @@ public class SevenDaysFragment extends Fragment {
     @SuppressLint("UseCompatLoadingForDrawables")
     public void onCreate(Bundle SavedInstanceState) {
         super.onCreate(SavedInstanceState);
-        date = new Date();
-        image = getResources().getDrawable(R.drawable.sunny);
-        temperature = "+3";
 
-
+        sevenDaysRecyclerViewAdapter = new SevenDaysRecyclerViewAdapter(getContext());
+        sevenDaysRecyclerViewAdapter.setDataSevenDayFragment("0");
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,11 +34,14 @@ public class SevenDaysFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(linearLayoutManager);
 
-        mRecyclerView.setAdapter(new SevenDaysRecyclerViewAdapter(getContext(), date, image, temperature));
+        mRecyclerView.setAdapter(sevenDaysRecyclerViewAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         return root;
 
+    }
+    void setDataSevenDayFragment(String temp) {
+       sevenDaysRecyclerViewAdapter.setDataSevenDayFragment(temp);
     }
 }
 

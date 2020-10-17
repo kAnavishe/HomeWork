@@ -1,7 +1,6 @@
 package com.example.android.task03;
 
 import android.annotation.SuppressLint;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,15 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-
 public class TodayFragment extends Fragment {
-    Drawable image;
-    String temperature;
-    String hour;
-    Date date;
+    private TodayRecyclerViewAdapter todayRecyclerViewAdapter;
 
     public TodayFragment() {
     }
@@ -30,11 +22,9 @@ public class TodayFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        date = new Date();
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
-        hour = simpleDateFormat.format(date);
-        temperature = "+4";
-        image = getResources().getDrawable(R.drawable.partly_cloudy);
+
+        todayRecyclerViewAdapter = new TodayRecyclerViewAdapter(getContext());
+        todayRecyclerViewAdapter.setDataTodayFragment("0");
     }
 
     @Override
@@ -45,8 +35,14 @@ public class TodayFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
-        recyclerView.setAdapter(new TodayRecyclerViewAdapter(getContext(), image, temperature, hour));
+        recyclerView.setAdapter(todayRecyclerViewAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
         return root;
     }
+
+    public void setDataTodayFragment(String temp) {
+        todayRecyclerViewAdapter.setDataTodayFragment(temp);
+    }
+
 }

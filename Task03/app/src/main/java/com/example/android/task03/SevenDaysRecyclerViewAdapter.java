@@ -17,16 +17,21 @@ import java.util.Date;
 
 public class SevenDaysRecyclerViewAdapter extends RecyclerView.Adapter<SevenDaysRecyclerViewAdapter.ViewHolder> {
 
-    Drawable image;
-    Date date;
     Context context;
+    Drawable image;
+    String fullDate;
     String temperature;
 
-    public SevenDaysRecyclerViewAdapter(Context ct, Date dt, Drawable img, String temp) {
+    public SevenDaysRecyclerViewAdapter(Context ct) {
         context = ct;
-        date = dt;
-        image = img;
+    }
+
+    void setDataSevenDayFragment(String temp) {
         temperature = temp;
+        Date date = new Date();
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM/dd/yyyy");
+        fullDate = simpleDateFormat.format(date);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -39,10 +44,8 @@ public class SevenDaysRecyclerViewAdapter extends RecyclerView.Adapter<SevenDays
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM/dd/yyyy");
         holder.imageView.setImageDrawable(image);
-        holder.textView1.setText(simpleDateFormat.format(date));
+        holder.textView1.setText(fullDate);
         holder.textView2.setText(temperature);
     }
 

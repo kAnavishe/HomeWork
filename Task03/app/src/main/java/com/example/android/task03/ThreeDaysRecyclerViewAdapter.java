@@ -1,5 +1,6 @@
 package com.example.android.task03;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -11,6 +12,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.android.task03.Retrofit.MainDataValues;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class ThreeDaysRecyclerViewAdapter extends RecyclerView.Adapter<ThreeDaysRecyclerViewAdapter.ViewHolder> {
 
     Context context;
@@ -20,12 +26,17 @@ public class ThreeDaysRecyclerViewAdapter extends RecyclerView.Adapter<ThreeDays
     String temperature;
 
 
-    public ThreeDaysRecyclerViewAdapter(Context ct, String week, String month, Drawable img, String temp) {
+    public ThreeDaysRecyclerViewAdapter(Context ct) {
         context = ct;
-        dayOfWeek = week;
-        dayOfMonth = month;
-        image = img;
+    }
+    public void setDataThreeDaysFragment(String temp){
         temperature = temp;
+        Date date = new Date();
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormatDayOfWeek = new SimpleDateFormat("E");
+        dayOfWeek = (simpleDateFormatDayOfWeek.format(date));
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormatDayOfMonth = new SimpleDateFormat("dd/MMMM");
+        dayOfMonth = (simpleDateFormatDayOfMonth.format(date));
+        notifyDataSetChanged();
     }
 
     @NonNull

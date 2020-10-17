@@ -1,5 +1,6 @@
 package com.example.android.task03;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -11,26 +12,34 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class TodayRecyclerViewAdapter extends RecyclerView.Adapter<TodayRecyclerViewAdapter.ViewHolder> {
 
-    Context context;
+    private Context mContext;
+    Date date;
     Drawable image;
     String temperature;
     String hour;
 
-    public TodayRecyclerViewAdapter(Context ct, Drawable img, String temp, String h) {
-        context = ct;
-        image = img;
+    void setDataTodayFragment(String temp) {
         temperature = temp;
-        hour = h;
+        date = new Date();
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
+        hour = simpleDateFormat.format(date);
+        notifyDataSetChanged();
+    }
+
+    public TodayRecyclerViewAdapter(Context ct) {
+        mContext = ct;
     }
 
     public TodayRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         View view = layoutInflater.inflate(R.layout.today_list_item, parent, false);
         return new ViewHolder(view);
     }
-
 
     public void onBindViewHolder(@NonNull TodayRecyclerViewAdapter.ViewHolder holder, int position) {
         holder.imageView.setImageDrawable(image);

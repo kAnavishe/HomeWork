@@ -1,7 +1,6 @@
 package com.example.android.task03;
 
 import android.annotation.SuppressLint;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,17 +11,9 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-
-
 public class ThreeDaysFragment extends Fragment {
 
-    String dayOfWeek;
-    String dayOfMonth;
-    Drawable image;
-    String temperature;
+    ThreeDaysRecyclerViewAdapter threeDaysRecyclerViewAdapter;
 
     public ThreeDaysFragment() {
     }
@@ -31,13 +22,8 @@ public class ThreeDaysFragment extends Fragment {
     public void onCreate(Bundle SavedInstanceState) {
         super.onCreate(SavedInstanceState);
 
-        Date date = new Date();
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormatDayOfWeek = new SimpleDateFormat("E");
-        dayOfWeek = (simpleDateFormatDayOfWeek.format(date)).toString();
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormatDayOfMonth = new SimpleDateFormat("dd/MMMM");
-        dayOfMonth = (simpleDateFormatDayOfMonth.format(date)).toString();
-        image = getResources().getDrawable(R.drawable.rain);
-        temperature = "+23";
+        threeDaysRecyclerViewAdapter = new ThreeDaysRecyclerViewAdapter(getContext());
+        setDataTodayFragment("0");
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,8 +32,12 @@ public class ThreeDaysFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        recyclerView.setAdapter(new ThreeDaysRecyclerViewAdapter(getContext(), dayOfWeek, dayOfMonth, image, temperature));
+        recyclerView.setAdapter(threeDaysRecyclerViewAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         return root;
+    }
+
+    public void setDataTodayFragment(String temp) {
+        threeDaysRecyclerViewAdapter.setDataThreeDaysFragment(temp);
     }
 }

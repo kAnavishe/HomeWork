@@ -28,6 +28,10 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static TodayFragment todayFragment;
+    public static ThreeDaysFragment threeDaysFragment;
+    public static SevenDaysFragment sevenDaysFragment;
+
     ViewPager mViewPager;
     PagerAdapter mViewPagerAdapter;
     Toolbar mToolBar;
@@ -39,6 +43,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        todayFragment = new TodayFragment();
+        threeDaysFragment = new ThreeDaysFragment();
+        sevenDaysFragment = new SevenDaysFragment();
 
         mSearchButton = findViewById(R.id.location_search_button);
         mToolBar = findViewById(R.id.toolBar);
@@ -90,11 +98,11 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new TodayFragment();
+                    return todayFragment;
                 case 1:
-                    return new ThreeDaysFragment();
+                    return threeDaysFragment;
                 case 2:
-                    return new SevenDaysFragment();
+                    return sevenDaysFragment;
             }
             return new TodayFragment();
         }
@@ -103,41 +111,24 @@ public class MainActivity extends AppCompatActivity {
         public int getCount() {
             return 3;
         }
-
-        @Nullable
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return "One";
-                case 1:
-                    return "Two";
-                case 2:
-                    return "Three";
-            }
-            return super.getPageTitle(position);
-        }
     }
 
     private void getWeatherData(String name) {
-        Log.d("MAX", "getWeatherData");
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Log.d("MAX", "apiInterface is ready");
         Call<MainData> call = apiInterface.getWeatherData(name);
-        Log.d("MAX", "call is ready " + apiInterface);
         call.enqueue(new Callback<MainData>() {
 
             @Override
             public void onResponse(Call<MainData> call, Response<MainData> response) {
+                String temp = response.body().getMainDataValues().getTemp();
+                todayFragment.setDataTodayFragment(temp);
+                threeDaysFragment.setDataTodayFragment(temp);
+                sevenDaysFragment.setDataSevenDayFragment(temp);
 
-                Log.d("MAX", "onResponse " + response.message()
-                        + " " + response.body().getMainDataValues().getTemp()
-                        + " " + response.body().getMainDataValues().getHumidity());
             }
 
             @Override
             public void onFailure(Call<MainData> call, Throwable t) {
-                Log.e("MAX", "onFailure " + t.getMessage(), t.getCause());
             }
         });
     }
