@@ -2,6 +2,8 @@ package com.example.android.task03.Retrofit;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.HashMap;
+
 public class MainDataValues {
 
     @SerializedName("temp")
@@ -11,7 +13,8 @@ public class MainDataValues {
     String humidity;
 
     public String getTemp() {
-        return temp;
+        char grad = 176;
+        return temp + " " + grad + "C";
     }
 
     public String getHumidity() {

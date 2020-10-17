@@ -38,6 +38,6 @@ public class ThreeDaysFragment extends Fragment {
     }
 
     public void setDataTodayFragment(String temp) {
-        threeDaysRecyclerViewAdapter.setDataThreeDaysFragment(temp);
+        threeDaysRecyclerViewAdapter.setDataThreeDaysFragment(MainActivity.weatherData.get("temperature"));
     }
 }

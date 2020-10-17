@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.icu.text.UnicodeMatcher;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,8 @@ import com.example.android.task03.Retrofit.MainData;
 import com.example.android.task03.Retrofit.MainDataValues;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.HashMap;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     public static ThreeDaysFragment threeDaysFragment;
     public static SevenDaysFragment sevenDaysFragment;
 
+    public static HashMap<String, String> weatherData = new HashMap<>();
     ViewPager mViewPager;
     PagerAdapter mViewPagerAdapter;
     Toolbar mToolBar;
@@ -121,9 +125,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<MainData> call, Response<MainData> response) {
                 String temp = response.body().getMainDataValues().getTemp();
-                todayFragment.setDataTodayFragment(temp);
-                threeDaysFragment.setDataTodayFragment(temp);
-                sevenDaysFragment.setDataSevenDayFragment(temp);
+                weatherData.put("temperature", temp);
+                todayFragment.setDataTodayFragment(weatherData.get("temperature"));
+                threeDaysFragment.setDataTodayFragment(weatherData.get("temperature"));
+                sevenDaysFragment.setDataSevenDayFragment(weatherData.get("temperature"));
 
             }
 

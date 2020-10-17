@@ -11,9 +11,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.android.task03.Retrofit.MainDataValues;
-
-
 public class SevenDaysFragment extends Fragment {
 
     SevenDaysRecyclerViewAdapter sevenDaysRecyclerViewAdapter;
@@ -27,9 +24,8 @@ public class SevenDaysFragment extends Fragment {
     public void onCreate(Bundle SavedInstanceState) {
         super.onCreate(SavedInstanceState);
 
-        MainDataValues mainDataValues = new MainDataValues();
         sevenDaysRecyclerViewAdapter = new SevenDaysRecyclerViewAdapter(getContext());
-        sevenDaysRecyclerViewAdapter.setDataSevenDayFragment(mainDataValues.getTemp());
+        sevenDaysRecyclerViewAdapter.setDataSevenDayFragment(MainActivity.weatherData.get("temperature"));
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
