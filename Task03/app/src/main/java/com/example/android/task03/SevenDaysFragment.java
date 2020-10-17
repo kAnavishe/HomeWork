@@ -11,20 +11,25 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.android.task03.Retrofit.MainDataValues;
+
 
 public class SevenDaysFragment extends Fragment {
 
     SevenDaysRecyclerViewAdapter sevenDaysRecyclerViewAdapter;
 
     public SevenDaysFragment() {
+
+        sevenDaysRecyclerViewAdapter = new SevenDaysRecyclerViewAdapter(getContext());
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     public void onCreate(Bundle SavedInstanceState) {
         super.onCreate(SavedInstanceState);
 
+        MainDataValues mainDataValues = new MainDataValues();
         sevenDaysRecyclerViewAdapter = new SevenDaysRecyclerViewAdapter(getContext());
-        sevenDaysRecyclerViewAdapter.setDataSevenDayFragment("0");
+        sevenDaysRecyclerViewAdapter.setDataSevenDayFragment(mainDataValues.getTemp());
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
