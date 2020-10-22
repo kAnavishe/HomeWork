@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     TabLayout mTabLayout;
     Button mSearchButton;
     EditText mEditText;
+    Boolean mPicChangeFlag;
 
 
     @Override
@@ -60,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        todayFragmentBackground = getDrawable(R.drawable.background_android);
+        todayFragmentBackground = getDrawable(R.drawable.android);
 
         todayFragment = new TodayFragment();
         threeDaysFragment = new ThreeDaysFragment();
@@ -73,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         mViewPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), mTabLayout.getTabCount());
         mViewPager.setAdapter(mViewPagerAdapter);
         mEditText = findViewById(R.id.location_search_edit_text);
+        mPicChangeFlag = false;
 
         weatherIcons.put("01d", getResources().getDrawable(R.drawable.i01d));
         weatherIcons.put("01n", getResources().getDrawable(R.drawable.i01n));
@@ -96,12 +99,6 @@ public class MainActivity extends AppCompatActivity {
         mSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Пасхалка другу :)
-                if (mEditText.getText().toString().trim().toLowerCase().equals("лена")) {
-                    todayFragment.mBackground.setImageResource(R.drawable.ear);
-                    todayFragment.mTemperature.setText("");
-                    todayFragment.mWeatherDescription.setText("");
-                }
                     getWeatherData(mEditText.getText().toString().trim());
                 closeKeyBoard();
             }
@@ -180,6 +177,7 @@ public class MainActivity extends AppCompatActivity {
                     closeKeyBoard();
                     return;
                 }
+
 
                 MainData[] mainData = response.body().getMainData();
                 String temp = mainData[0].getMainDataValues().getTemp();

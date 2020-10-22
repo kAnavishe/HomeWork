@@ -1,5 +1,6 @@
 package com.example.android.Task03;
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,9 +8,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.Task03.Retrofit.MainData;
+
+import java.time.LocalDate;
 
 public class SevenDaysRecyclerViewAdapter extends RecyclerView.Adapter<SevenDaysRecyclerViewAdapter.ViewHolder> {
 
@@ -36,13 +40,16 @@ public class SevenDaysRecyclerViewAdapter extends RecyclerView.Adapter<SevenDays
         return new ViewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (mainData != null) {
             holder.imageView.setImageDrawable(MainActivity.weatherIcons.get(mainData[count].getWeathers()[0].getWeatherIcon()));
         }
         if (mainData != null) {
-            holder.textView1.setText(mainData[count].getDate());
+            LocalDate rowDate = LocalDate.parse(mainData[count].getDate());
+            String date = rowDate.getDayOfMonth() + "." + rowDate.getMonthValue() + "." + rowDate.getYear();
+            holder.textView1.setText(date);
         }
         if (mainData != null) {
             holder.textView2.setText(mainData[count].getMainDataValues().getTemp());

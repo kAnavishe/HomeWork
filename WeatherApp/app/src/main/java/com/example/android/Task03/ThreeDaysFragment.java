@@ -37,7 +37,6 @@ public class ThreeDaysFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         backGround = root.findViewById(R.id.three_days_background);
 
-
         recyclerView.setAdapter(threeDaysRecyclerViewAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         return root;

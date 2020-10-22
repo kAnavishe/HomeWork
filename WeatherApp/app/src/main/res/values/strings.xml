@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">WeatherAppFromMax</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="seven_days">7 days</string>
+    <string name="seven_days">5 days</string>
     <string name="three_days">3 days</string>
     <string name="today">today</string>
     <string name="enter_location">Enter location</string>

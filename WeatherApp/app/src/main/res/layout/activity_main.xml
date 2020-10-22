@@ -33,7 +33,7 @@
                 android:layout_weight="3"
                 android:background="@color/colorPrimary"
                 android:hint="@string/enter_location"
-                android:textColor="@color/design_default_color_on_secondary"
+                android:textColor="@color/design_default_color_background"
                 android:textColorHint="@color/design_default_color_background"
                 android:textSize="18sp" />
 
