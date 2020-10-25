@@ -1,8 +1,6 @@
 package com.example.android.Task03;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,29 +14,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.Task03.Retrofit.MainData;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class TodayRecyclerViewAdapter extends RecyclerView.Adapter<TodayRecyclerViewAdapter.ViewHolder> {
 
     Context mContext;
-    Date date;
-    Drawable image;
-    String temperature;
-    String hour;
     MainData[] mainData;
 
     public TodayRecyclerViewAdapter(Context ct) {
         mContext = ct;
     }
 
-    public void setDataTodayFragment(String temp, MainData[] values) {
-      //  image = values.getResources().getDrawable(R.drawable.weather_background_clouds);
+    public void setDataTodayFragment(MainData[] values) {
         mainData = values;
-        temperature = values[0].getMainDataValues().getTemp();
-        date = new Date();
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
-        hour = simpleDateFormat.format(date);
         notifyDataSetChanged();
 
     }
@@ -62,7 +48,6 @@ public class TodayRecyclerViewAdapter extends RecyclerView.Adapter<TodayRecycler
             holder.textView2.setText(mainData[position].getHour());
         }
     }
-
 
     public int getItemCount() {
         if (mainData != null) {

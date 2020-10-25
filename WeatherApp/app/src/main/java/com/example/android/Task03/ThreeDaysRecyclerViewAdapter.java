@@ -1,4 +1,5 @@
 package com.example.android.Task03;
+
 import android.content.Context;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.Task03.Retrofit.MainData;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
@@ -26,7 +28,8 @@ public class ThreeDaysRecyclerViewAdapter extends RecyclerView.Adapter<ThreeDays
         context = ct;
         count = 0;
     }
-    public void setDataThreeDaysFragment(MainData[] values){
+
+    public void setDataThreeDaysFragment(MainData[] values) {
         mainData = values;
         count = 0;
         notifyDataSetChanged();

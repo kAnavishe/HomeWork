@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
@@ -28,6 +27,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.HashMap;
 
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,7 +36,9 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("StaticFieldLeak")
     public static TodayFragment todayFragment;
+    @SuppressLint("StaticFieldLeak")
     public static ThreeDaysFragment threeDaysFragment;
+    @SuppressLint("StaticFieldLeak")
     public static SevenDaysFragment sevenDaysFragment;
 
     public static HashMap<String, String> weatherData = new HashMap<>();
@@ -49,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
     Button mSearchButton;
     EditText mEditText;
     Boolean mPicChangeFlag;
-
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
@@ -96,12 +97,10 @@ public class MainActivity extends AppCompatActivity {
         weatherIcons.put("50d", getResources().getDrawable(R.drawable.i50d));
         weatherIcons.put("50n", getResources().getDrawable(R.drawable.i50n));
 
-        mSearchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    getWeatherData(mEditText.getText().toString().trim());
-                closeKeyBoard();
-            }
+
+        mSearchButton.setOnClickListener(v -> {
+            getWeatherData(mEditText.getText().toString().trim());
+            closeKeyBoard();
         });
 
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -165,34 +164,36 @@ public class MainActivity extends AppCompatActivity {
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
-            Call<ListData> call = apiInterface.getWeatherData(name);
+
+        Call<ListData> call = apiInterface.getWeatherData(name);
 
         call.enqueue(new Callback<ListData>() {
 
+            @SuppressLint("CheckResult")
             @Override
             public void onResponse(Call<ListData> call, Response<ListData> response) {
-                try {
-                    MainData[] test = response.body().getMainData();
-                } catch (Exception e) {
+
+                Observable<MainData[]> observable = Observable.fromCallable(() -> {
+                    return response.body().getMainData();
+                });
+
+                observable.subscribe(todayFragment::setDataTodayFragment, throwable -> {
+                            todayFragment.mBackground.setImageResource(R.drawable.ear);
+                            todayFragment.backGroundChanged = true;
+                            todayFragment.mBackground.setPaddingRelative(0, 0, 0, 0);
+                            closeKeyBoard();
+                        }
+                        , () -> closeKeyBoard());
+                observable.subscribe(threeDaysFragment::setDataThreeDaysFragment, throwable -> {
+                    threeDaysFragment.backGround.setImageResource(R.drawable.ear);
                     closeKeyBoard();
-                    return;
-                }
-
-
-                MainData[] mainData = response.body().getMainData();
-                String temp = mainData[0].getMainDataValues().getTemp();
-                String icon = mainData[0].getWeathers()[0].getWeatherIcon();
-
-                weatherData.put("temperature", temp);
-                weatherData.put("icon", icon);
-
-
-                todayFragment.setDataTodayFragment(weatherData.get("temperature"), mainData);
-                threeDaysFragment.setDataThreeDaysFragment(mainData);
-                sevenDaysFragment.setDataSevenDaysFragment(mainData);
+                });
+                observable.subscribe(sevenDaysFragment::setDataSevenDaysFragment, throwable -> {
+                    sevenDaysFragment.backGround.setImageResource(R.drawable.ear);
+                    closeKeyBoard();
+                });
 
             }
-
 
             @Override
             public void onFailure(Call<ListData> call, Throwable t) {

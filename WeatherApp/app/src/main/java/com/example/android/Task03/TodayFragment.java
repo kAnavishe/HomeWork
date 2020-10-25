@@ -2,6 +2,7 @@ package com.example.android.Task03;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,7 +24,6 @@ public class TodayFragment extends Fragment {
     ImageView mBackground;
     ImageView mWeatherCondition;
     Boolean backGroundChanged = false;
-    MainData[] mainData;
 
     public TodayFragment() {
     }
@@ -65,22 +65,21 @@ public class TodayFragment extends Fragment {
         return root;
     }
 
-
-    public void setMainText(String text){
+    public void setMainText(String text) {
         mMainText.setText(text);
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    public void setDataTodayFragment(String temp, MainData[] mainData) {
-        todayRecyclerViewAdapter.setDataTodayFragment(temp, mainData);
+    public void setDataTodayFragment(MainData[] mainData) {
+        todayRecyclerViewAdapter.setDataTodayFragment(mainData);
         setMainText(mainData[0].getWeathers()[0].getWeatherCondition());
-        mTemperature.setText(temp);
+        mTemperature.setText(mainData[0].getMainDataValues().getTemp());
         mWeatherCondition.setImageDrawable(MainActivity.weatherIcons.get(mainData[0].getWeathers()[0].getWeatherIcon()));
         MainActivity.todayFragmentBackground = getResources().getDrawable(R.drawable.weather_background_clouds);
         mWeatherDescription.setText(mainData[0].getWeathers()[0].getWeatherCondition());
         setMainText("");
         mBackground.setImageDrawable(MainActivity.todayFragmentBackground);
-        mBackground.setPaddingRelative(0,0,0,0);
+        mBackground.setPaddingRelative(0, 0, 0, 0);
         backGroundChanged = true;
     }
 }
