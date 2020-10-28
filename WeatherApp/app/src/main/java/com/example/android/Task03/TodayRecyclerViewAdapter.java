@@ -26,9 +26,9 @@ public class TodayRecyclerViewAdapter extends RecyclerView.Adapter<TodayRecycler
     public void setDataTodayFragment(MainData[] values) {
         mainData = values;
         notifyDataSetChanged();
-
     }
 
+    @NonNull
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         View view = layoutInflater.inflate(R.layout.today_list_item, parent, false);

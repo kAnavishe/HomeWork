@@ -23,7 +23,6 @@ public class ThreeDaysRecyclerViewAdapter extends RecyclerView.Adapter<ThreeDays
     MainData[] mainData;
     int count;
 
-
     public ThreeDaysRecyclerViewAdapter(Context ct) {
         context = ct;
         count = 0;
@@ -33,6 +32,7 @@ public class ThreeDaysRecyclerViewAdapter extends RecyclerView.Adapter<ThreeDays
         mainData = values;
         count = 0;
         notifyDataSetChanged();
+
     }
 
     @NonNull

@@ -1,24 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/viewFlipperSevenDays"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SevenDaysFragment">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/seven_days_background"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop" />
+        tools:context=".SevenDaysFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:padding="8dp"
-        android:id="@+id/seven_days_recyclerView"
+        <TextView
+            android:id="@+id/text_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/find_your_weather"
+            android:textAllCaps="true"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/background_android"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <ImageView
+            android:id="@+id/background_android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="124dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/android_go"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_main" />
+
+        <ImageView
+            android:id="@+id/seven_days_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/seven_days_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:itemCount="7"
+            tools:listitem="@layout/seven_days_list_item" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBarSevenDays"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:itemCount="7"
-        tools:listitem="@layout/seven_days_list_item" />
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="#38B2F9" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/sevenDaysError"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ear" />
+</ViewFlipper>

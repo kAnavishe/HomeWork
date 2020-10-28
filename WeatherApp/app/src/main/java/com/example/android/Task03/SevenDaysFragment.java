@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ViewFlipper;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -18,6 +19,8 @@ public class SevenDaysFragment extends Fragment {
 
     SevenDaysRecyclerViewAdapter sevenDaysRecyclerViewAdapter;
     ImageView backGround;
+    ViewFlipper sevenDaysViewFlipper;
+    ImageView error;
 
     public SevenDaysFragment() {
     }
@@ -25,22 +28,22 @@ public class SevenDaysFragment extends Fragment {
     @SuppressLint("UseCompatLoadingForDrawables")
     public void onCreate(Bundle SavedInstanceState) {
         super.onCreate(SavedInstanceState);
-
         sevenDaysRecyclerViewAdapter = new SevenDaysRecyclerViewAdapter(getContext());
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View root = inflater.inflate(R.layout.fragment_seven_days, container, false);
         RecyclerView mRecyclerView = root.findViewById(R.id.seven_days_recyclerView);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        backGround = root.findViewById(R.id.seven_days_background);
-
         mRecyclerView.setAdapter(sevenDaysRecyclerViewAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
+        backGround = root.findViewById(R.id.seven_days_background);
+
+        sevenDaysViewFlipper = root.findViewById(R.id.viewFlipperSevenDays);
+
+        error = root.findViewById(R.id.sevenDaysError);
         return root;
 
     }

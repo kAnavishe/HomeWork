@@ -10,7 +10,7 @@
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="#38B2F9"
         android:minHeight="?attr/actionBarSize"
         android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:theme="?attr/actionBarTheme"
@@ -26,13 +26,13 @@
             android:weightSum="4">
 
             <EditText
-                android:paddingRight="16dp"
                 android:id="@+id/location_search_edit_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:background="@color/colorPrimary"
+                android:background="#38B2F9"
                 android:hint="@string/enter_location"
+                android:paddingRight="16dp"
                 android:textColor="@color/design_default_color_background"
                 android:textColorHint="@color/design_default_color_background"
                 android:textSize="18sp" />
@@ -93,4 +93,5 @@
         app:layout_constraintTop_toBottomOf="@+id/tabLayout">
 
     </androidx.viewpager.widget.ViewPager>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

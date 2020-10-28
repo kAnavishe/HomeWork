@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     Button mSearchButton;
     EditText mEditText;
     Boolean mPicChangeFlag;
+    Boolean error;
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setAdapter(mViewPagerAdapter);
         mEditText = findViewById(R.id.location_search_edit_text);
         mPicChangeFlag = false;
+        error = false;
 
         weatherIcons.put("01d", getResources().getDrawable(R.drawable.i01d));
         weatherIcons.put("01n", getResources().getDrawable(R.drawable.i01n));
@@ -97,9 +99,13 @@ public class MainActivity extends AppCompatActivity {
         weatherIcons.put("50d", getResources().getDrawable(R.drawable.i50d));
         weatherIcons.put("50n", getResources().getDrawable(R.drawable.i50n));
 
-
         mSearchButton.setOnClickListener(v -> {
             getWeatherData(mEditText.getText().toString().trim());
+
+            todayFragment.todayViewFlipper.setDisplayedChild(1);
+            threeDaysFragment.threeDaysViewFlipper.setDisplayedChild(1);
+            sevenDaysFragment.sevenDaysViewFlipper.setDisplayedChild(1);
+
             closeKeyBoard();
         });
 
@@ -151,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                 case 2:
                     return sevenDaysFragment;
             }
-            return new TodayFragment();
+            return null;
         }
 
         @Override
@@ -178,26 +184,32 @@ public class MainActivity extends AppCompatActivity {
                 });
 
                 observable.subscribe(todayFragment::setDataTodayFragment, throwable -> {
-                            todayFragment.mBackground.setImageResource(R.drawable.ear);
-                            todayFragment.backGroundChanged = true;
-                            todayFragment.mBackground.setPaddingRelative(0, 0, 0, 0);
+                    error = true;
                             closeKeyBoard();
-                        }
-                        , () -> closeKeyBoard());
+                        });
                 observable.subscribe(threeDaysFragment::setDataThreeDaysFragment, throwable -> {
-                    threeDaysFragment.backGround.setImageResource(R.drawable.ear);
                     closeKeyBoard();
                 });
                 observable.subscribe(sevenDaysFragment::setDataSevenDaysFragment, throwable -> {
-                    sevenDaysFragment.backGround.setImageResource(R.drawable.ear);
                     closeKeyBoard();
                 });
 
+                if (error) {
+                    todayFragment.todayViewFlipper.setDisplayedChild(2);
+                    threeDaysFragment.threeDaysViewFlipper.setDisplayedChild(2);
+                    sevenDaysFragment.sevenDaysViewFlipper.setDisplayedChild(2);
+                    error = false;
+
+
+                } else {
+                    todayFragment.todayViewFlipper.setDisplayedChild(0);
+                    threeDaysFragment.threeDaysViewFlipper.setDisplayedChild(0);
+                    sevenDaysFragment.sevenDaysViewFlipper.setDisplayedChild(0);
+                }
             }
 
             @Override
             public void onFailure(Call<ListData> call, Throwable t) {
-                Log.d("MAX", "gonFailure");
             }
         });
     }

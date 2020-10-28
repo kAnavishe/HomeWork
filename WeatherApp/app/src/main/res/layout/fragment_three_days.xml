@@ -1,25 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ThreeDaysFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/viewFlipperThreeDays"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-
-    <ImageView
-        android:id="@+id/three_days_background"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop" />
+        tools:context=".ThreeDaysFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:padding="8dp"
-        tools:itemCount="3"
-        tools:listitem="@layout/three_days_list_item"
-        android:id="@+id/three_days_recycler_view"
-        app:layout_constraintTop_toTopOf="parent"
+        <TextView
+            android:id="@+id/text_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/find_your_weather"
+            android:textAllCaps="true"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/background_android"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <ImageView
+            android:id="@+id/background_android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="124dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/android_hand"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_main" />
+
+
+        <ImageView
+            android:id="@+id/three_days_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/three_days_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:itemCount="3"
+            tools:listitem="@layout/three_days_list_item" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBarThreeDays"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="#38B2F9" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/threeDaysError"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ear" />
+</ViewFlipper>

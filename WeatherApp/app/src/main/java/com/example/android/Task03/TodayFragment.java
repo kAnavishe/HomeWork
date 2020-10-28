@@ -3,6 +3,7 @@ package com.example.android.Task03;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,7 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 import com.example.android.Task03.Retrofit.MainData;
 
@@ -23,7 +26,10 @@ public class TodayFragment extends Fragment {
     TextView mMainText;
     ImageView mBackground;
     ImageView mWeatherCondition;
-    Boolean backGroundChanged = false;
+    ViewFlipper todayViewFlipper;
+    ConstraintLayout constraintLayout;
+    ProgressBar progressBar;
+    ImageView error;
 
     public TodayFragment() {
     }
@@ -39,7 +45,11 @@ public class TodayFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_today, container, false);
-        RecyclerView recyclerView = root.findViewById(R.id.today_recyclerView);
+        RecyclerView mRecyclerView = root.findViewById(R.id.today_recyclerView);
+
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        mRecyclerView.setAdapter(todayRecyclerViewAdapter);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         mTemperature = root.findViewById(R.id.temperature);
         mTemperature.setText(MainActivity.weatherData.get("temperature"));
@@ -47,21 +57,15 @@ public class TodayFragment extends Fragment {
         mMainText = root.findViewById(R.id.text_main);
         mWeatherDescription = root.findViewById(R.id.weather_description_todayFragment);
 
-
         mBackground = root.findViewById(R.id.background_android);
-        mBackground.setImageDrawable(MainActivity.todayFragmentBackground);
 
         mWeatherCondition = root.findViewById(R.id.weather_condition);
         mWeatherCondition.setImageDrawable(MainActivity.weatherIcons.get(MainActivity.weatherData.get("icon")));
 
-        if (backGroundChanged) {
-            mBackground.setPaddingRelative(0, 0, 0, 0);
-        }
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-
-        recyclerView.setAdapter(todayRecyclerViewAdapter);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        todayViewFlipper = root.findViewById(R.id.viewFlipperToday);
+        constraintLayout = root.findViewById(R.id.constraintToday);
+        progressBar = root.findViewById(R.id.progressBarToday);
+        error = root.findViewById(R.id.todayError);
         return root;
     }
 
@@ -70,7 +74,7 @@ public class TodayFragment extends Fragment {
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    public void setDataTodayFragment(MainData[] mainData) {
+    void setDataTodayFragment(MainData[] mainData) {
         todayRecyclerViewAdapter.setDataTodayFragment(mainData);
         setMainText(mainData[0].getWeathers()[0].getWeatherCondition());
         mTemperature.setText(mainData[0].getMainDataValues().getTemp());
@@ -80,6 +84,5 @@ public class TodayFragment extends Fragment {
         setMainText("");
         mBackground.setImageDrawable(MainActivity.todayFragmentBackground);
         mBackground.setPaddingRelative(0, 0, 0, 0);
-        backGroundChanged = true;
     }
 }
