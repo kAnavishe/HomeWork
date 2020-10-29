@@ -50,12 +50,13 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ProgressBar
-        android:id="@+id/progressBarSevenDays"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:background="#38B2F9" />
+<!--    <ProgressBar-->
+<!--        android:id="@+id/progressBarSevenDays"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:indeterminateTint="@color/cardview_shadow_start_color"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        android:background="@color/design_default_color_background" />-->
 
     <ImageView
         android:id="@+id/sevenDaysError"

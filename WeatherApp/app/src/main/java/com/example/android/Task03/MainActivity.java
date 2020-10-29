@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -16,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     EditText mEditText;
     Boolean mPicChangeFlag;
     Boolean error;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         threeDaysFragment = new ThreeDaysFragment();
         sevenDaysFragment = new SevenDaysFragment();
 
+        swipeRefreshLayout = findViewById(R.id.mainSwipeRefresh);
         mSearchButton = findViewById(R.id.location_search_button);
         mToolBar = findViewById(R.id.toolBar);
         mTabLayout = findViewById(R.id.tabLayout);
@@ -100,13 +102,17 @@ public class MainActivity extends AppCompatActivity {
         weatherIcons.put("50n", getResources().getDrawable(R.drawable.i50n));
 
         mSearchButton.setOnClickListener(v -> {
+            swipeRefreshLayout.setRefreshing(true);
             getWeatherData(mEditText.getText().toString().trim());
-
-            todayFragment.todayViewFlipper.setDisplayedChild(1);
-            threeDaysFragment.threeDaysViewFlipper.setDisplayedChild(1);
-            sevenDaysFragment.sevenDaysViewFlipper.setDisplayedChild(1);
-
             closeKeyBoard();
+        });
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getWeatherData(mEditText.getText().toString().trim());
+                closeKeyBoard();
+            }
         });
 
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -157,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
                 case 2:
                     return sevenDaysFragment;
             }
-            return null;
+            return todayFragment;
         }
 
         @Override
@@ -166,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void getWeatherData(String name) {
+     void getWeatherData(String name) {
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
@@ -179,10 +185,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ListData> call, Response<ListData> response) {
 
-                Observable<MainData[]> observable = Observable.fromCallable(() -> {
-                    return response.body().getMainData();
-                });
-
+                Observable<MainData[]> observable = Observable.fromCallable(() -> response.body().getMainData());
+                error = false;
                 observable.subscribe(todayFragment::setDataTodayFragment, throwable -> {
                     error = true;
                             closeKeyBoard();
@@ -195,9 +199,10 @@ public class MainActivity extends AppCompatActivity {
                 });
 
                 if (error) {
-                    todayFragment.todayViewFlipper.setDisplayedChild(2);
-                    threeDaysFragment.threeDaysViewFlipper.setDisplayedChild(2);
-                    sevenDaysFragment.sevenDaysViewFlipper.setDisplayedChild(2);
+                    todayFragment.todayViewFlipper.setDisplayedChild(1);
+                    threeDaysFragment.threeDaysViewFlipper.setDisplayedChild(1);
+                    sevenDaysFragment.sevenDaysViewFlipper.setDisplayedChild(1);
+                    swipeRefreshLayout.setRefreshing(false);
                     error = false;
 
 
@@ -205,11 +210,14 @@ public class MainActivity extends AppCompatActivity {
                     todayFragment.todayViewFlipper.setDisplayedChild(0);
                     threeDaysFragment.threeDaysViewFlipper.setDisplayedChild(0);
                     sevenDaysFragment.sevenDaysViewFlipper.setDisplayedChild(0);
+                    swipeRefreshLayout.setRefreshing(false);
                 }
             }
 
             @Override
             public void onFailure(Call<ListData> call, Throwable t) {
+                todayFragment.setMainText("No Connection");
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }

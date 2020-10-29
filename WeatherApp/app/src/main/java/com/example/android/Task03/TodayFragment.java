@@ -64,8 +64,9 @@ public class TodayFragment extends Fragment {
 
         todayViewFlipper = root.findViewById(R.id.viewFlipperToday);
         constraintLayout = root.findViewById(R.id.constraintToday);
-        progressBar = root.findViewById(R.id.progressBarToday);
+       // progressBar = root.findViewById(R.id.progressBarToday);
         error = root.findViewById(R.id.todayError);
+
         return root;
     }
 
