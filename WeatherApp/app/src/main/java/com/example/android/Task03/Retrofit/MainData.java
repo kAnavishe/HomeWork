@@ -4,29 +4,25 @@ import com.google.gson.annotations.SerializedName;
 
 public class MainData {
 
+    @SerializedName("dt")
+    public int rawDate;
+
     @SerializedName("weather")
     private WeatherData[] weathers;
+
+    @SerializedName("dt_txt")
+    String date;
+
+    @SerializedName("main")
+    private MainDataValues mainDataValues;
 
     public WeatherData[] getWeathers() {
         return weathers;
     }
 
-    @SerializedName("dt_txt")
-    String date;
-
-    public String getDate() {
-        String [] parseDate = date.split(" ");
-        return parseDate[0];
+    public int getRawDate() {
+        return rawDate;
     }
-
-    public String getHour() {
-        String [] parseDate = date.split(" ");
-
-        return parseDate[1].substring(0, 5);
-    }
-
-    @SerializedName("main")
-    private MainDataValues mainDataValues;
 
     public MainData(MainDataValues mainDataValues) {
         this.mainDataValues = mainDataValues;
@@ -34,5 +30,15 @@ public class MainData {
 
     public MainDataValues getMainDataValues() {
         return mainDataValues;
+    }
+
+    public String getDate() {
+        String[] parseDate = date.split(" ");
+        return parseDate[0];
+    }
+
+    public String getHourFromRawTxtDate() {
+        String[] parseDate = date.split(" ");
+        return parseDate[1].substring(0, 5);
     }
 }

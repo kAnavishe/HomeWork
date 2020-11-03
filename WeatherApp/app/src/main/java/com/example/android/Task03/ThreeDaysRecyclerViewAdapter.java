@@ -19,20 +19,18 @@ import java.time.LocalDate;
 
 public class ThreeDaysRecyclerViewAdapter extends RecyclerView.Adapter<ThreeDaysRecyclerViewAdapter.ViewHolder> {
 
-    Context context;
+    private Context context;
     MainData[] mainData;
-    int count;
+    private int count;
 
     public ThreeDaysRecyclerViewAdapter(Context ct) {
         context = ct;
-        count = 0;
     }
 
     public void setDataThreeDaysFragment(MainData[] values) {
         mainData = values;
         count = 0;
         notifyDataSetChanged();
-
     }
 
     @NonNull
@@ -47,11 +45,9 @@ public class ThreeDaysRecyclerViewAdapter extends RecyclerView.Adapter<ThreeDays
     @Override
     public void onBindViewHolder(@NonNull ThreeDaysRecyclerViewAdapter.ViewHolder holder, int position) {
 
-
         if (mainData != null) {
             holder.imageView.setImageDrawable(MainActivity.weatherIcons.get(mainData[count].getWeathers()[0].getWeatherIcon()));
         }
-
         if (mainData != null) {
             LocalDate date = LocalDate.parse(mainData[count].getDate());
             String dayOfMonth = date.getDayOfMonth() + " " + date.getMonth();

@@ -1,4 +1,5 @@
 package com.example.android.Task03;
+
 import android.content.Context;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -15,18 +16,17 @@ import com.example.android.Task03.Retrofit.MainData;
 
 import java.time.LocalDate;
 
-public class SevenDaysRecyclerViewAdapter extends RecyclerView.Adapter<SevenDaysRecyclerViewAdapter.ViewHolder> {
+public class FiveDaysRecyclerViewAdapter extends RecyclerView.Adapter<FiveDaysRecyclerViewAdapter.ViewHolder> {
 
-    Context context;
+    private Context context;
     MainData[] mainData;
-    int count;
+    private int count;
 
-    public SevenDaysRecyclerViewAdapter(Context ct) {
+    public FiveDaysRecyclerViewAdapter(Context ct) {
         context = ct;
-        count = 0;
     }
 
-    void setDataSevenDayFragment(MainData[] values) {
+    void setDataFiveDayFragment(MainData[] values) {
         count = 0;
         mainData = values;
         notifyDataSetChanged();
@@ -43,6 +43,7 @@ public class SevenDaysRecyclerViewAdapter extends RecyclerView.Adapter<SevenDays
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         if (mainData != null) {
             holder.imageView.setImageDrawable(MainActivity.weatherIcons.get(mainData[count].getWeathers()[0].getWeatherIcon()));
         }

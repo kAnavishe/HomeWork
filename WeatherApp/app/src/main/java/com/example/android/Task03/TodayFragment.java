@@ -3,7 +3,6 @@ package com.example.android.Task03;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -24,12 +22,9 @@ public class TodayFragment extends Fragment {
     TextView mTemperature;
     TextView mWeatherDescription;
     TextView mMainText;
-    ImageView mBackground;
+    ImageView mBackGround;
     ImageView mWeatherCondition;
     ViewFlipper todayViewFlipper;
-    ConstraintLayout constraintLayout;
-    ProgressBar progressBar;
-    ImageView error;
 
     public TodayFragment() {
     }
@@ -57,15 +52,12 @@ public class TodayFragment extends Fragment {
         mMainText = root.findViewById(R.id.text_main);
         mWeatherDescription = root.findViewById(R.id.weather_description_todayFragment);
 
-        mBackground = root.findViewById(R.id.background_android);
+        mBackGround = root.findViewById(R.id.today_background);
 
         mWeatherCondition = root.findViewById(R.id.weather_condition);
         mWeatherCondition.setImageDrawable(MainActivity.weatherIcons.get(MainActivity.weatherData.get("icon")));
 
         todayViewFlipper = root.findViewById(R.id.viewFlipperToday);
-        constraintLayout = root.findViewById(R.id.constraintToday);
-       // progressBar = root.findViewById(R.id.progressBarToday);
-        error = root.findViewById(R.id.todayError);
 
         return root;
     }
@@ -80,10 +72,7 @@ public class TodayFragment extends Fragment {
         setMainText(mainData[0].getWeathers()[0].getWeatherCondition());
         mTemperature.setText(mainData[0].getMainDataValues().getTemp());
         mWeatherCondition.setImageDrawable(MainActivity.weatherIcons.get(mainData[0].getWeathers()[0].getWeatherIcon()));
-        MainActivity.todayFragmentBackground = getResources().getDrawable(R.drawable.weather_background_clouds);
         mWeatherDescription.setText(mainData[0].getWeathers()[0].getWeatherCondition());
-        setMainText("");
-        mBackground.setImageDrawable(MainActivity.todayFragmentBackground);
-        mBackground.setPaddingRelative(0, 0, 0, 0);
+        mBackGround.setVisibility(View.VISIBLE);
     }
 }

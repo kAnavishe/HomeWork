@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".SevenDaysFragment">
+        tools:context=".FiveDaysFragment">
 
         <TextView
             android:id="@+id/text_main"
@@ -34,13 +34,15 @@
             app:layout_constraintTop_toBottomOf="@+id/text_main" />
 
         <ImageView
-            android:id="@+id/seven_days_background"
+            android:id="@+id/five_days_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
+            android:background="@color/design_default_color_background"
+            android:scaleType="centerCrop"
+            android:visibility="invisible" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/seven_days_recyclerView"
+            android:id="@+id/five_days_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
@@ -50,17 +52,37 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    <ProgressBar-->
-<!--        android:id="@+id/progressBarSevenDays"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:indeterminateTint="@color/cardview_shadow_start_color"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center_horizontal"-->
-<!--        android:background="@color/design_default_color_background" />-->
+    <!--    <ProgressBar-->
+    <!--        android:id="@+id/progressBarSevenDays"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:indeterminateTint="@color/cardview_shadow_start_color"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center_horizontal"-->
+    <!--        android:background="@color/design_default_color_background" />-->
 
     <ImageView
-        android:id="@+id/sevenDaysError"
+        android:id="@+id/fiveDaysError"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/ear" />
+
+    <TextView
+        android:id="@+id/no_connection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="no connection"
+        android:textAllCaps="true"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/no_connection_on_server"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="no connection on server"
+        android:textAllCaps="true"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 </ViewFlipper>

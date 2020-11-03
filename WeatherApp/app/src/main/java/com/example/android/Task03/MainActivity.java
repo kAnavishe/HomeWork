@@ -23,6 +23,7 @@ import com.example.android.Task03.Retrofit.ApiClient;
 import com.example.android.Task03.Retrofit.ApiInterface;
 import com.example.android.Task03.Retrofit.ListData;
 import com.example.android.Task03.Retrofit.MainData;
+import com.example.android.Task03.Retrofit.NetworkConnectionInterceptor;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.HashMap;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("StaticFieldLeak")
     public static ThreeDaysFragment threeDaysFragment;
     @SuppressLint("StaticFieldLeak")
-    public static SevenDaysFragment sevenDaysFragment;
+    public static FiveDaysFragment fiveDaysFragment;
 
     public static HashMap<String, String> weatherData = new HashMap<>();
     public static HashMap<String, Drawable> weatherIcons = new HashMap<>();
@@ -53,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
     Boolean mPicChangeFlag;
     Boolean error;
     SwipeRefreshLayout swipeRefreshLayout;
+    String searchText;
+    int count;
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
@@ -65,11 +68,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        todayFragmentBackground = getDrawable(R.drawable.android);
-
         todayFragment = new TodayFragment();
         threeDaysFragment = new ThreeDaysFragment();
-        sevenDaysFragment = new SevenDaysFragment();
+        fiveDaysFragment = new FiveDaysFragment();
 
         swipeRefreshLayout = findViewById(R.id.mainSwipeRefresh);
         mSearchButton = findViewById(R.id.location_search_button);
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         mEditText = findViewById(R.id.location_search_edit_text);
         mPicChangeFlag = false;
         error = false;
+        searchText = "";
 
         weatherIcons.put("01d", getResources().getDrawable(R.drawable.i01d));
         weatherIcons.put("01n", getResources().getDrawable(R.drawable.i01n));
@@ -103,16 +105,15 @@ public class MainActivity extends AppCompatActivity {
 
         mSearchButton.setOnClickListener(v -> {
             swipeRefreshLayout.setRefreshing(true);
-            getWeatherData(mEditText.getText().toString().trim());
+            count = 0;
+            searchText = mEditText.getText().toString().trim();
+            getWeatherData(searchText);
             closeKeyBoard();
         });
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getWeatherData(mEditText.getText().toString().trim());
-                closeKeyBoard();
-            }
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            getWeatherData(mEditText.getText().toString().trim());
+            closeKeyBoard();
         });
 
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -161,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
                 case 1:
                     return threeDaysFragment;
                 case 2:
-                    return sevenDaysFragment;
+                    return fiveDaysFragment;
             }
             return todayFragment;
         }
@@ -172,10 +173,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-     void getWeatherData(String name) {
-
-        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-
+    void getWeatherData(String name) {
+        count += 1;
+        ApiInterface apiInterface = ApiClient.getClient(this).create(ApiInterface.class);
 
         Call<ListData> call = apiInterface.getWeatherData(name);
 
@@ -185,39 +185,61 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ListData> call, Response<ListData> response) {
 
-                Observable<MainData[]> observable = Observable.fromCallable(() -> response.body().getMainData());
-                error = false;
-                observable.subscribe(todayFragment::setDataTodayFragment, throwable -> {
+                Observable<Integer> observableCityData = Observable.fromCallable(() -> response.body().getCityData().getTimezone());
+                observableCityData.subscribe(TodayRecyclerViewAdapter::getLocalDate, throwable -> {
                     error = true;
-                            closeKeyBoard();
-                        });
-                observable.subscribe(threeDaysFragment::setDataThreeDaysFragment, throwable -> {
                     closeKeyBoard();
                 });
-                observable.subscribe(sevenDaysFragment::setDataSevenDaysFragment, throwable -> {
+
+                Observable<MainData[]> observableMainData = Observable.fromCallable(() -> response.body().getMainData());
+                observableMainData.subscribe(todayFragment::setDataTodayFragment, throwable -> {
+                    closeKeyBoard();
+                });
+                observableMainData.subscribe(threeDaysFragment::setDataThreeDaysFragment, throwable -> {
+                    closeKeyBoard();
+                });
+                observableMainData.subscribe(fiveDaysFragment::setDataFiveDaysFragment, throwable -> {
                     closeKeyBoard();
                 });
 
                 if (error) {
                     todayFragment.todayViewFlipper.setDisplayedChild(1);
                     threeDaysFragment.threeDaysViewFlipper.setDisplayedChild(1);
-                    sevenDaysFragment.sevenDaysViewFlipper.setDisplayedChild(1);
+                    fiveDaysFragment.fiveDaysViewFlipper.setDisplayedChild(1);
                     swipeRefreshLayout.setRefreshing(false);
                     error = false;
 
 
                 } else {
+                    count = 0;
                     todayFragment.todayViewFlipper.setDisplayedChild(0);
                     threeDaysFragment.threeDaysViewFlipper.setDisplayedChild(0);
-                    sevenDaysFragment.sevenDaysViewFlipper.setDisplayedChild(0);
+                    fiveDaysFragment.fiveDaysViewFlipper.setDisplayedChild(0);
                     swipeRefreshLayout.setRefreshing(false);
                 }
             }
 
             @Override
             public void onFailure(Call<ListData> call, Throwable t) {
-                todayFragment.setMainText("No Connection");
-                swipeRefreshLayout.setRefreshing(false);
+                if (t instanceof NetworkConnectionInterceptor.NoConnectivityException) {
+                    if (count <= 3) {
+                        getWeatherData(searchText);
+                    } else {
+                        todayFragment.todayViewFlipper.setDisplayedChild(3);
+                        threeDaysFragment.threeDaysViewFlipper.setDisplayedChild(3);
+                        fiveDaysFragment.fiveDaysViewFlipper.setDisplayedChild(3);
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                }
+                if (count <= 3) {
+                    getWeatherData(searchText);
+
+                } else {
+                    todayFragment.todayViewFlipper.setDisplayedChild(2);
+                    threeDaysFragment.threeDaysViewFlipper.setDisplayedChild(2);
+                    fiveDaysFragment.fiveDaysViewFlipper.setDisplayedChild(2);
+                    swipeRefreshLayout.setRefreshing(false);
+                }
             }
         });
     }

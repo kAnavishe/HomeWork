@@ -7,11 +7,14 @@ public class ListData {
     @SerializedName("list")
     private MainData[] mainData;
 
-    public ListData(MainData[] mainData) {
-        this.mainData = mainData;
-    }
+    @SerializedName("city")
+    private CityData cityData;
 
     public MainData[] getMainData() {
         return mainData;
+    }
+
+    public CityData getCityData() {
+        return cityData;
     }
 }

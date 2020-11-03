@@ -1,5 +1,6 @@
 package com.example.android.Task03;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -14,10 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.Task03.Retrofit.MainData;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+
 public class TodayRecyclerViewAdapter extends RecyclerView.Adapter<TodayRecyclerViewAdapter.ViewHolder> {
 
     Context mContext;
     MainData[] mainData;
+    private static int timeZone;
 
     public TodayRecyclerViewAdapter(Context ct) {
         mContext = ct;
@@ -45,7 +50,11 @@ public class TodayRecyclerViewAdapter extends RecyclerView.Adapter<TodayRecycler
             holder.textView1.setText(mainData[position].getMainDataValues().getTemp());
         }
         if (mainData != null) {
-            holder.textView2.setText(mainData[position].getHour());
+
+            Timestamp ts = new Timestamp((mainData[position].getRawDate() + timeZone) * 1000L);
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat isoFormat = new SimpleDateFormat("HH:mm");
+
+            holder.textView2.setText(isoFormat.format(ts));
         }
     }
 
@@ -68,5 +77,9 @@ public class TodayRecyclerViewAdapter extends RecyclerView.Adapter<TodayRecycler
             textView2 = itemView.findViewById(R.id.current_time);
             imageView = itemView.findViewById(R.id.weather_condition);
         }
+    }
+
+    public static void getLocalDate(int unix) {
+        timeZone = unix + 8 * 3600;
     }
 }

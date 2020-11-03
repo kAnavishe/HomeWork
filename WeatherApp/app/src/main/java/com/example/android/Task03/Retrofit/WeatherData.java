@@ -6,12 +6,12 @@ public class WeatherData {
     @SerializedName("icon")
     String weatherIcon;
 
+    @SerializedName("main")
+    String weatherCondition;
+
     public String getWeatherIcon() {
         return weatherIcon;
     }
-
-    @SerializedName("main")
-    String weatherCondition;
 
     public String getWeatherCondition() {
         return weatherCondition;

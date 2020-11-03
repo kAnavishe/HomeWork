@@ -15,41 +15,39 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.Task03.Retrofit.MainData;
 
-public class SevenDaysFragment extends Fragment {
+public class FiveDaysFragment extends Fragment {
 
-    SevenDaysRecyclerViewAdapter sevenDaysRecyclerViewAdapter;
-    ImageView backGround;
-    ViewFlipper sevenDaysViewFlipper;
-    ImageView error;
+    FiveDaysRecyclerViewAdapter fiveDaysRecyclerViewAdapter;
+    private ImageView mBackGround;
+    ViewFlipper fiveDaysViewFlipper;
 
-    public SevenDaysFragment() {
+    public FiveDaysFragment() {
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     public void onCreate(Bundle SavedInstanceState) {
         super.onCreate(SavedInstanceState);
-        sevenDaysRecyclerViewAdapter = new SevenDaysRecyclerViewAdapter(getContext());
+        fiveDaysRecyclerViewAdapter = new FiveDaysRecyclerViewAdapter(getContext());
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_seven_days, container, false);
-        RecyclerView mRecyclerView = root.findViewById(R.id.seven_days_recyclerView);
+        RecyclerView mRecyclerView = root.findViewById(R.id.five_days_recyclerView);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecyclerView.setAdapter(sevenDaysRecyclerViewAdapter);
+        mRecyclerView.setAdapter(fiveDaysRecyclerViewAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        backGround = root.findViewById(R.id.seven_days_background);
+        mBackGround = root.findViewById(R.id.five_days_background);
 
-        sevenDaysViewFlipper = root.findViewById(R.id.viewFlipperSevenDays);
+        fiveDaysViewFlipper = root.findViewById(R.id.viewFlipperSevenDays);
 
-        error = root.findViewById(R.id.sevenDaysError);
         return root;
-
     }
-    void setDataSevenDaysFragment(MainData[] values) {
-       sevenDaysRecyclerViewAdapter.setDataSevenDayFragment(values);
-       backGround.setImageDrawable(getResources().getDrawable(R.drawable.weather_background_clouds));
+
+    void setDataFiveDaysFragment(MainData[] values) {
+        fiveDaysRecyclerViewAdapter.setDataFiveDayFragment(values);
+        mBackGround.setVisibility(View.VISIBLE);
     }
 }
 

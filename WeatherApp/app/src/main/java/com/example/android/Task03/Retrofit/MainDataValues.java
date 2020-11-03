@@ -11,10 +11,10 @@ public class MainDataValues {
     String humidity;
 
     public String getTemp() {
-        int t = (int)temp;
-            char grad = 176;
-            return t + "" + grad;
-        }
+        int t = (int) temp;
+        char grad = 176;
+        return t + "" + grad;
+    }
 
     public String getHumidity() {
         return humidity;
