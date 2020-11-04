@@ -1,6 +1,5 @@
 package com.example.android.Task03;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -15,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.Task03.Retrofit.MainData;
 
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class TodayRecyclerViewAdapter extends RecyclerView.Adapter<TodayRecyclerViewAdapter.ViewHolder> {
 
@@ -50,11 +51,12 @@ public class TodayRecyclerViewAdapter extends RecyclerView.Adapter<TodayRecycler
             holder.textView1.setText(mainData[position].getMainDataValues().getTemp());
         }
         if (mainData != null) {
+            Date date = new Date((mainData[position].getRawDate() + timeZone) * 1000L);
 
-            Timestamp ts = new Timestamp((mainData[position].getRawDate() + timeZone) * 1000L);
-            @SuppressLint("SimpleDateFormat") SimpleDateFormat isoFormat = new SimpleDateFormat("HH:mm");
+            SimpleDateFormat isoFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+            isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 
-            holder.textView2.setText(isoFormat.format(ts));
+            holder.textView2.setText(isoFormat.format(date));
         }
     }
 
@@ -80,6 +82,6 @@ public class TodayRecyclerViewAdapter extends RecyclerView.Adapter<TodayRecycler
     }
 
     public static void getLocalDate(int unix) {
-        timeZone = unix + 8 * 3600;
+        timeZone = unix;
     }
 }
