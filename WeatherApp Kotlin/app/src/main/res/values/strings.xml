@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">WeatherAppFromMax</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="seven_days">5 days</string>
+    <string name="three_days">3 days</string>
+    <string name="today">today</string>
+    <string name="enter_location">Enter location</string>
+    <string name="find_your_weather">find your weather</string>
+
+
+</resources>

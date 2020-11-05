@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/viewFlipperSevenDays"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".FiveDaysFragment">
+
+        <TextView
+            android:id="@+id/text_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/find_your_weather"
+            android:textAllCaps="true"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/background_android"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <ImageView
+            android:id="@+id/background_android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="124dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/android_go"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_main" />
+
+        <ImageView
+            android:id="@+id/five_days_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/design_default_color_background"
+            android:scaleType="centerCrop"
+            android:visibility="invisible" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/five_days_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:itemCount="7"
+            tools:listitem="@layout/seven_days_list_item" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    <ProgressBar-->
+    <!--        android:id="@+id/progressBarSevenDays"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:indeterminateTint="@color/cardview_shadow_start_color"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center_horizontal"-->
+    <!--        android:background="@color/design_default_color_background" />-->
+
+    <ImageView
+        android:id="@+id/fiveDaysError"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ear" />
+
+    <TextView
+        android:id="@+id/no_connection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="no connection"
+        android:textAllCaps="true"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/no_connection_on_server"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="no connection on server"
+        android:textAllCaps="true"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+</ViewFlipper>
