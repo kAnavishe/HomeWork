@@ -146,9 +146,7 @@ class MainActivity : AppCompatActivity() {
 
             @SuppressLint("CheckResult")
             override fun onResponse(call: Call<ListData?>?, response: Response<ListData?>?) {
-                Log.d("MAX", "onResponse")
                 val observableCityData = Observable.fromCallable { response?.body()?.cityData?.timezone }
-                Log.d("MAX", "observable")
                 observableCityData.subscribe({ unix: Int? -> TodayRecyclerViewAdapter.getLocalDate(unix) }) {
                     error = true
                     closeKeyBoard()
